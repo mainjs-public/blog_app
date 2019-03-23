@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import { connect } from 'react-redux';
 
 import axios from 'axios';
 
@@ -13,24 +13,41 @@ class App extends Component {
   }
 
   componentWillMount() {
-    console.log('componentWillMount');
+
+    this.props.dispatch({ type: 'FETCH_BLOG_REQUEST' });
+
     axios.get('http://localhost:4000/blogs').then(res => res.data).then(data => {
-      this.setState({
-        data,
-      })
+      this.props.dispatch({ type: 'FETCH_BLOG_SUCCESS', payload: data });
     });
+
   }
 
   render() {
     const { data } = this.state;
+    const { blogs, loading } = this.props;
+
+    console.log(blogs, loading);
+
+    if (loading) {
+      return <p>Loading</p>
+    }
+
     return (
       <div className="App">
         <ul>
-          {data.map(blog => (<li key={blog.id}><a href={`blogs/${blog.id}`}>{blog.name}</a></li>))}
+          {blogs.map(blog => (<li key={blog.id}><a href={`blogs/${blog.id}`}>{blog.name}</a></li>))}
         </ul>
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  const { loading, blogs } = state;
+  return {
+    loading,
+    blogs
+  };
+}
+
+export default connect(mapStateToProps)(App);
