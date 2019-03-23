@@ -1,25 +1,33 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
+import axios from 'axios';
+
 class App extends Component {
+
+   constructor(props) {
+    super(props);
+    this.state = {
+      data: []
+    };
+  }
+
+  componentWillMount() {
+    console.log('componentWillMount');
+    axios.get('http://localhost:4000/blogs').then(res => res.data).then(data => {
+      this.setState({
+        data,
+      })
+    });
+  }
+
   render() {
+    const { data } = this.state;
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <ul>
+          {data.map(blog => (<li key={blog.id}><a href={`blogs/${blog.id}`}>{blog.name}</a></li>))}
+        </ul>
       </div>
     );
   }
