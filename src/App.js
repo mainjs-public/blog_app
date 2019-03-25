@@ -1,53 +1,46 @@
 import React, { Component } from 'react';
+import request from './utils/request.js';
+
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+
 import { connect } from 'react-redux';
 
-import axios from 'axios';
+import { LayoutFront } from './layouts/LayoutFront';
+import { LayoutBack } from './layouts/LayoutBack';
+import { LoginPage } from './pages/LoginPage';
+
+import { getBlogs } from './modules/blog/actions'
 
 class App extends Component {
-
-   constructor(props) {
-    super(props);
-    this.state = {
-      data: []
-    };
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   componentWillMount() {
-
-    this.props.dispatch({ type: 'FETCH_BLOG_REQUEST' });
-
-    axios.get('http://localhost:4000/blogs').then(res => res.data).then(data => {
-      this.props.dispatch({ type: 'FETCH_BLOG_SUCCESS', payload: data });
-    });
-
+    this.props.dispatch(getBlogs());
   }
 
   render() {
-    const { data } = this.state;
-    const { blogs, loading } = this.props;
-
-    console.log(blogs, loading);
-
-    if (loading) {
-      return <p>Loading</p>
-    }
-
     return (
-      <div className="App">
-        <ul>
-          {blogs.map(blog => (<li key={blog.id}><a href={`blogs/${blog.id}`}>{blog.name}</a></li>))}
-        </ul>
-      </div>
+      <Router>
+        <Switch>
+          <Route path="/login" component={LoginPage} />
+          <Route path="/dashboard" component={LayoutBack} />
+          <Route path="/" component={LayoutFront} />
+        </Switch>
+      </Router>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  const { loading, blogs } = state;
+const mapStateToProps = state => {
+  const {
+    blog: { loading, data },
+  } = state;
   return {
     loading,
-    blogs
+    data,
   };
-}
+};
 
 export default connect(mapStateToProps)(App);
