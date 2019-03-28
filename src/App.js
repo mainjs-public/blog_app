@@ -5,9 +5,11 @@ import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
+import PrivateRouter from './components/PrivateRouter';
+
 import { LayoutFront } from './layouts/LayoutFront';
 import { LayoutBack } from './layouts/LayoutBack';
-import { LoginPage } from './pages/LoginPage';
+import LoginPage from './pages/LoginPage';
 
 import { getBlogs } from './modules/blog/actions'
 
@@ -25,7 +27,7 @@ class App extends Component {
       <Router>
         <Switch>
           <Route path="/login" component={LoginPage} />
-          <Route path="/dashboard" component={LayoutBack} />
+          <PrivateRouter path="/dashboard" component={LayoutBack} />
           <Route path="/" component={LayoutFront} />
         </Switch>
       </Router>

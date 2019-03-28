@@ -1,18 +1,18 @@
 const initState = {
-  loading: false,
-  data: [],
+  pending: false,
+  isLogin: localStorage.getItem("token") ? true : false,
 };
 
-const blogReducer = (state = initState, action) => {
+const userReducer = (state = initState, action) => {
   switch (action.type) {
-    case 'BLOG_REQUEST':
-      return { ...state, loading: true };
-    case 'BLOG_REQUEST_SUCCESS':
-      return { ...state, loading: false, blogs: action.payload };
+    case 'LOGIN_REQUEST':
+      return { ...state, pending: true };
+    case 'LOGIN_REQUEST_SUCCESS':
+      return { ...state, pending: false, isLogin: true };
     default:
       return state;
   }
   return state;
 };
 
-export default blogReducer;
+export default userReducer;
