@@ -18,9 +18,9 @@ class App extends Component {
   //   super(props);
   // }
 
-  componentWillMount() {
-    this.props.dispatch(getBlogs());
-  }
+  // componentWillMount() {
+  //   this.props.dispatch(getBlogs());
+  // }
 
   render() {
     return (

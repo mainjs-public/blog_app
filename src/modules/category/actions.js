@@ -1,48 +1,47 @@
 import request from '../../utils/request';
 
-export function getBlogList() {
+export function getCategories() {
   return dispatch => {
-    dispatch({ type: 'BLOG_REQUEST' });
+    dispatch({ type: 'CATEGORY_REQUEST' });
     request
-      .get('/blogs')
+      .get('/categories')
       .then(res => res.data)
       .then(data => {
-        console.log(data);
-        // dispatch({ type: 'BLOG_REQUEST_SUCCESS', payload: data });
+        dispatch({ type: 'CATEGORY_REQUEST_SUCCESS', payload: data });
       })
       .catch(error => console.log(error));
   };
 }
 
-export function deleteBlog(id) {
+export function deleteCategory(id) {
   return dispatch => {
     request
-      .delete(`/blogs/${id}`)
+      .delete(`/categories/${id}`)
       .then(data => {
-        // dispatch(getBlogs());
+        dispatch(getCategories());
       })
       .catch(error => console.log(error));
   };
 }
 
 
-export function addBlog(data) {
+export function addCategory(data) {
   return dispatch => {
     request
-      .post('/blogs', data)
+      .post('/categories', data)
       .then(data => {
-        // dispatch(getBlogs());
+        dispatch(getCategories());
       })
       .catch(error => console.log(error));
   };
 }
 
-export function updateBlog(id, data) {
+export function updateCategory(id, data) {
   return dispatch => {
     request
-      .put(`/blogs/${id}`, data)
+      .put(`/categories/${id}`, data)
       .then(data => {
-        // dispatch(getBlogs());
+        dispatch(getCategories());
       })
       .catch(error => console.log(error));
   };

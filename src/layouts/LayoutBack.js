@@ -4,6 +4,12 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import { Dashboard } from '../pages/dashboard';
 
+import CategoryForm from '../pages/dashboard/category/CategoryForm';
+import CategoryList from '../pages/dashboard/category/CategoryList';
+
+import BlogForm from '../pages/dashboard/blog/BlogForm';
+import BlogList from '../pages/dashboard/blog/BlogList';
+
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { Menu } from './Menu';
@@ -13,12 +19,12 @@ export class LayoutBack extends Component {
     return (
       <Router>
         <div className="container">
-          <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <Link class="navbar-brand" to="/dashboard">
+          <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <Link className="navbar-brand" to="/dashboard">
               Dashboard
             </Link>
             <button
-              class="navbar-toggler"
+              className="navbar-toggler"
               type="button"
               data-toggle="collapse"
               data-target="#navbarSupportedContent"
@@ -26,23 +32,23 @@ export class LayoutBack extends Component {
               aria-expanded="false"
               aria-label="Toggle navigation"
             >
-              <span class="navbar-toggler-icon" />
+              <span className="navbar-toggler-icon" />
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                  <Link class="nav-link" to="/dashboard/category">
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul className="navbar-nav mr-auto">
+                <li className="nav-item active">
+                  <Link className="nav-link" to="/dashboard/category">
                     Categories
                   </Link>
                 </li>
-                <li class="nav-item">
-                  <Link class="nav-link" to="/dashboard/blogs">
+                <li className="nav-item">
+                  <Link className="nav-link" to="/dashboard/blog">
                     Blogs
                   </Link>
                 </li>
-                <li class="nav-item">
-                  <Link class="nav-link" to="/dashboard/contacts">
+                <li className="nav-item">
+                  <Link className="nav-link" to="/dashboard/contacts">
                     Contacts
                   </Link>
                 </li>
@@ -51,9 +57,13 @@ export class LayoutBack extends Component {
           </nav>
 
           <Route path="/dashboard" exact component={Dashboard} />
-          <Route path="/dashboard/category" component={Dashboard} />
-          <Route path="/dashboard/blogs" component={Dashboard} />
-          <Route path="/dashboard/contacts" component={Dashboard} />
+
+          <Route path="/dashboard/category" exact component={CategoryList} />
+          <Route path="/dashboard/category/form" exact component={CategoryForm} />
+
+          <Route path="/dashboard/blog" exact component={BlogList} />
+          <Route path="/dashboard/blog/form" exact component={BlogForm} />
+
         </div>
       </Router>
     );
