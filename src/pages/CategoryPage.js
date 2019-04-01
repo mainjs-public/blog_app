@@ -9,7 +9,7 @@ export class CategoryPage extends Component {
       <div className="container">
         <BlogFeature />
         {[1, 2, 3].map(blog => (
-          <BlogItem key={blog} />
+          <BlogItem key={blog} blog={{}} />
         ))}
       </div>
     );

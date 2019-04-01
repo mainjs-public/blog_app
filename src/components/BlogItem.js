@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 export class BlogItem extends Component {
   render() {
-    const { type } = this.props;
+    const { type, blog } = this.props;
+
+    const created = blog ? moment(blog.created).format('MMMM, DD YYYY') : '';
 
     if (type === 'blog_type_1') {
       return (
@@ -45,36 +48,15 @@ export class BlogItem extends Component {
 
     return (
       <div className="blog-post">
-        <h2 className="blog-post-title">Another blog post</h2>
+        <h2 className="blog-post-title">{blog.name}</h2>
         <p className="blog-post-meta">
-          December 23, 2013 by <a href="#">Jacob</a>
+          { created } by Admin
         </p>
 
         <p>
-          Cum sociis natoque penatibus et magnis{' '}
-          <a href="#">dis parturient montes</a>, nascetur ridiculus mus. Aenean
-          eu leo quam. Pellentesque ornare sem lacinia quam venenatis
-          vestibulum. Sed posuere consectetur est at lobortis. Cras mattis
-          consectetur purus sit amet fermentum.
+         {blog.description}
         </p>
-        <blockquote>
-          <p>
-            Curabitur blandit tempus porttitor.{' '}
-            <strong>Nullam quis risus eget urna mollis</strong> ornare vel eu
-            leo. Nullam id dolor id nibh ultricies vehicula ut id elit.
-          </p>
-        </blockquote>
-        <p>
-          Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis
-          consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla
-          sed consectetur.
-        </p>
-        <p>
-          Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
-          Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget
-          lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac,
-          vestibulum at eros.
-        </p>
+        <Link to={`/blog/${blog.slug}`}>Read more..</Link>
       </div>
     );
   }
