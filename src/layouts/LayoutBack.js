@@ -10,10 +10,6 @@ import CategoryList from '../pages/dashboard/category/CategoryList';
 import BlogForm from '../pages/dashboard/blog/BlogForm';
 import BlogList from '../pages/dashboard/blog/BlogList';
 
-import { Header } from './Header';
-import { Footer } from './Footer';
-import { Menu } from './Menu';
-
 export class LayoutBack extends Component {
   render() {
     return (

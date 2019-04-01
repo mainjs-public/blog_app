@@ -5,22 +5,12 @@ import { getBlogList, deleteBlog } from '../../../modules/blog/actions';
 
 class BlogList extends Component {
 
-	constructor(props) {
-		super(props);
-	}
-
-	componentWillMount() {
-		console.log('componentWillMount');
+	componentDidMount() {
 		this.props.dispatch(getBlogList());
 	}
 
-	componentDidMount() {
-		console.log('componentDidMount');
-		// this.props.dispatch(getBlogList());
-	}
-
 	handleDelete(id) {
-		// this.props.dispatch(deleteBlog(id));
+		this.props.dispatch(deleteBlog(id));
 	}
 
 	render() {

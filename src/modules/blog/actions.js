@@ -8,7 +8,7 @@ export function getBlogList() {
       .then(res => res.data)
       .then(data => {
         console.log(data);
-        // dispatch({ type: 'BLOG_REQUEST_SUCCESS', payload: data });
+        dispatch({ type: 'BLOG_REQUEST_SUCCESS', payload: data });
       })
       .catch(error => console.log(error));
   };
@@ -19,7 +19,7 @@ export function deleteBlog(id) {
     request
       .delete(`/blogs/${id}`)
       .then(data => {
-        // dispatch(getBlogs());
+        dispatch(getBlogList());
       })
       .catch(error => console.log(error));
   };
@@ -31,7 +31,7 @@ export function addBlog(data) {
     request
       .post('/blogs', data)
       .then(data => {
-        // dispatch(getBlogs());
+        dispatch(getBlogList());
       })
       .catch(error => console.log(error));
   };
@@ -42,7 +42,7 @@ export function updateBlog(id, data) {
     request
       .put(`/blogs/${id}`, data)
       .then(data => {
-        // dispatch(getBlogs());
+        dispatch(getBlogList());
       })
       .catch(error => console.log(error));
   };
